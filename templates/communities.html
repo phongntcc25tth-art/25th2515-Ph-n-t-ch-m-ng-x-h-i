@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Phát Hiện Cộng Đồng</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-dark"><div class="container">
+<a class="navbar-brand" href="/">← Trang Chủ</a>
+</div></nav>
+<div class="container py-4">
+<h2 class="text-center mb-4">🏘️ SO SÁNH 3 THUẬT TOÁN PHÁT HIỆN CỘNG ĐỒNG</h2>
+
+<div class="alert alert-success text-center">
+<strong>Độ ổn định:</strong> {{ dg.muc_do_on_dinh }} (Chênh lệch Modularity: {{ dg.do_lech_max_min }})
+</div>
+
+<div class="row">
+<div class="col-md-4">
+<div class="card h-100 border-primary">
+<div class="card-header bg-primary text-white"><h5>Louvain</h5></div>
+<div class="card-body">
+<p><strong>Số nhóm:</strong> {{ lv.so_nhom }}</p>
+<p><strong>Modularity:</strong> {{ lv.modularity }}</p>
+{% for nhom, ds in lv.danh_sach.items() %}
+<div class="alert alert-light border mb-2">
+<strong>Nhóm {{ nhom+1 }} ({{ ds|length }}):</strong>
+<p class="small mb-0">{{ ds|join(', ') }}</p>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card h-100 border-success">
+<div class="card-header bg-success text-white"><h5>Label Propagation</h5></div>
+<div class="card-body">
+<p><strong>Số nhóm:</strong> {{ lp.so_nhom }}</p>
+{% for nhom, ds in lp.danh_sach.items() %}
+<div class="alert alert-light border mb-2">
+<strong>Nhóm {{ nhom+1 }} ({{ ds|length }}):</strong>
+<p class="small mb-0">{{ ds|join(', ') }}</p>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card h-100 border-warning">
+<div class="card-header bg-warning text-dark"><h5>Girvan-Newman</h5></div>
+<div class="card-body">
+<p><strong>Số nhóm:</strong> {{ gn.so_nhom }}</p>
+{% for nhom, ds in gn.danh_sach.items() %}
+<div class="alert alert-light border mb-2">
+<strong>Nhóm {{ nhom+1 }} ({{ ds|length }}):</strong>
+<p class="small mb-0">{{ ds|join(', ') }}</p>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
